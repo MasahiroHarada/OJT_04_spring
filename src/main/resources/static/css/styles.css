@@ -1,0 +1,44 @@
+html, body {
+  line-height: 1.6;
+  background: #fafafa;
+}
+
+main {
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+}
+
+.meta-info {
+  margin-bottom: .5rem;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.date {
+  margin-left: .5em;
+  display: inline-block;
+  color: #777;
+}
+
+.topic-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.box-title {
+  margin-bottom: 1rem;
+}
+
+.topic-item, .comment-item {
+  border-bottom: 1px solid #eaeaea;
+  padding: 1.25rem 0;
+}
+.topic-item:first-child, .comment-item:first-child {
+  padding-top: 0;
+}
+.topic-item:last-child, .comment-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}

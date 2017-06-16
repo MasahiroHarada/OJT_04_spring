@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>掲示板サンプル</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">掲示板サンプル</h1>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+
+    <div class="container">
+
+      <div class="box">
+        <h2 class="topic-title" th:text="${topic.title}"></h2>
+        <hr />
+        <p class="meta-info">
+          <span class="name" th:text="${topic.submitter}"></span>
+          <span class="date" th:text="${topic.createdAt}"></span>
+        </p>
+        <p class="content" th:text="${topic.content}"></p>
+      </div>
+
+      <p class="box-title" th:text="|コメント（${topic.comments.size()}件）|"></p>
+      <div class="box">
+        <ul class="comments">
+          <li class="comment-item" th:each="comment : ${topic.comments}">
+            <p class="meta-info">
+              <span class="name" th:text="${comment.name}"></span>
+              <span class="date" th:text="${comment.createdAt}">2017/06/12</span>
+            </p>
+            <p class="content" th:text="${comment.content}"></p>
+          </li>
+        </ul>
+      </div>
+
+      <p class="box-title">コメント投稿</p>
+      <div class="box">
+        <form th:action="@{'/topics/' + ${topic.id} + '/comments'}" th:object="${commentForm}" method="post">
+          <div class="field">
+            <label class="label">なまえ</label>
+            <p class="control">
+              <input class="input" type="text" th:field="*{name}" th:errorclass="is-danger" />
+            </p>
+            <p class="help is-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+          </div>
+
+          <div class="field">
+            <label class="label">コメント</label>
+            <p class="control">
+              <textarea class="textarea" th:field="*{content}" th:errorclass="is-danger"></textarea>
+            </p>
+            <p class="help is-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+          </div>
+
+          <div class="field">
+            <p class="has-text-right">
+              <button type="submit" class="button is-primary">送信</button>
+            </p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
